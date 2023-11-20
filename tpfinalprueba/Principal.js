@@ -28,6 +28,7 @@ class Principal {
   
     dibujar() {
     if (this.pantalla===0) {
+      this.j.reiniciar ();
       background (this.fondo.dibujarPantalla (13)); //--- PORTADA ---
       this.bot1.dibujarBoton(0, 1, "INICIO");
       this.bot2.dibujarBoton (0, 2, "CREDITOS");
@@ -52,15 +53,18 @@ class Principal {
       this.bot10.dibujarBoton (9,10, "A");
       this.bot11.dibujarBoton (9,12, "B");
     } else if (this.pantalla === 5){
+      background (200);
       this.j.display (); // --- JUEGO --- 
       if (this.j.getEstado() === 7){
        this.pantalla = 7;
       } else if  (this.j.getEstado() === 8){
        this.pantalla = 8;
+       //this.j.reiniciar ();
     } 
     } else if (this.pantalla == 7){ // --- FINAL 1 ----
       background (this.fondo.dibujarPantalla (5));
-      this.bot8.dibujarBoton (7,0,"VOLVER");  
+      this.bot8.dibujarBoton (7,0,"VOLVER"); 
+      //this.j.reiniciar ();
     } else if (this.pantalla == 8){
       background (this.fondo.dibujarPantalla (14)); // --- CAMINO DE GANAR ---
       this.bot9.dibujarBoton (8,9,"SIGUIENTE");

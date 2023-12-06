@@ -8,7 +8,6 @@ class Personaje {
     this.tocar = false;
     this.fondo = new Pantallas (); 
     this.load ();
-    //this.personaje = loadImage ('data/personaje.png');
     
   }
   

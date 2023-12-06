@@ -5,7 +5,7 @@ class Auto {
     this.ancho = ancho;
     this.alto = alto;
     this.dx = random(1, 3); // --- PARA LA VELOCIDAD ---
-    this.chocador = true;
+    this.chocador = true; // --- PARA QUE SOLO SE PIERDA UNA SOLA VIDA POR AUTO ---
     this.load ();
   }
   load (){

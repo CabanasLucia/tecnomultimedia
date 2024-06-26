@@ -1,0 +1,69 @@
+class Mancha {
+    constructor(celdasOcupadas) {
+        this.imagen = new Imagenes();
+        imageMode(CENTER);
+        this.posicionesX = [100, 300, 500];
+        this.posicionesY = [100, 300, 500];
+        this.indiceMancha = floor(random(this.imagen.manchas.length));
+        this.posicionValida = false;
+        this.generarPosicion(celdasOcupadas);
+        this.anguloFondoAmarillo = random(TWO_PI);
+        this.anguloMancha = random(TWO_PI);
+        this.desplazamientoX = 0;
+      
+
+    }
+
+    dibujar() {
+        if (this.posicionValida) {
+            push();
+            translate(this.posX + this.desplazamientoX, this.posY);
+            rotate(this.anguloFondoAmarillo);
+            image(this.imagen.fondoAmarillo, 0, 0, 200, 200);
+            rotate(this.anguloMancha - this.anguloFondoAmarillo);
+            image(this.imagen.manchas[this.indiceMancha], 0, 0, 200, 200);
+            pop();
+        }
+    }
+
+    generarPosicion(celdasOcupadas) {
+        let intentos = 0;
+        while (!this.posicionValida && intentos < 10) {
+            this.posX = random(this.posicionesX);
+            this.posY = random(this.posicionesY);
+            if (!this.estaOcupada(celdasOcupadas, this.posX, this.posY)) {
+                this.posicionValida = true;
+            }
+            intentos++;
+        }
+    }
+
+    estaOcupada(celdasOcupadas, x, y) {
+        for (let celda of celdasOcupadas) {
+            if (celda.x === x && celda.y === y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    rotarFondo(nuevoAnguloFondo) {
+        this.anguloFondoAmarillo = nuevoAnguloFondo;
+    }
+
+    rotarMancha(nuevoAnguloMancha) {
+        this.anguloMancha = nuevoAnguloMancha;
+    }
+
+  
+    funcionTecla(keyCode) {
+        if ((key === 'm') && (this.manchasActuales < this.cantManchas)) {
+            let nuevaMancha = new Mancha(this.celdasOcupadas);
+            if (nuevaMancha.posicionValida) {
+                this.manchas.push(nuevaMancha);
+                this.celdasOcupadas.push({ x: nuevaMancha.posX, y: nuevaMancha.posY });
+                this.manchasActuales = this.manchasActuales + 1;
+            }
+        }
+    }
+}
